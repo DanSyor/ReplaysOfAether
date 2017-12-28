@@ -414,6 +414,9 @@ def lengthSet(folder):
     print()
 
 def tourneyResreamReplays(in_folder, out_folder):
+    if not os.path.isdir(in_folder):
+        print("Folder " + in_folder + " not found.")
+        return
     sets = []
     log = ""
     for (p, dirs, files) in os.walk(in_folder):
@@ -450,4 +453,13 @@ def tourneyResreamReplays(in_folder, out_folder):
     with open(os.path.join(out_folder,"log.txt"), "w") as logFile:
         logFile.write(log)
 
-tourneyResreamReplays("SuperNova 10","replays_sn10")
+#tourneyResreamReplays("SuperNova 10","replays_sn10")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("in_folder")
+    parser.add_argument("out_folder")
+    args = parser.parse_args()
+    tourneyResreamReplays(args.in_folder,args.out_folder)
+      
